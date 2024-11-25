@@ -45,7 +45,7 @@ cam = Picamera2()
 cam.configure(
     cam.create_preview_configuration(
         main={"format": 'RGB888', "size": (176, 208)},
-        controls={"FrameDurationLimits": (41667, 41667)},  # 20 FPS
+        controls={"FrameDurationLimits": (41667, 41667)},  # 24 FPS
     )
 )
 cam.start()
