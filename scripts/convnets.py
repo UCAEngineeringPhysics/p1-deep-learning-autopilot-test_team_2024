@@ -55,7 +55,7 @@ class AutopilotNet(nn.Module):
         x = x.view(-1, 128 * 6 * 8)  # Flatten, 128*6*8
         x = F.relu(self.fc1(x))  # 128
         x = F.relu(self.fc2(x))  # 128
-        y = F.relu(self.fc3(x))  # 2
+        y = self.fc3(x)  # 2
 
         return y
 
