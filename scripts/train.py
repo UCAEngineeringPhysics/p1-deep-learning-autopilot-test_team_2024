@@ -84,17 +84,17 @@ bearcart_dataset = BearCartDataset(annotations_file, img_dir)
 print(f"data length: {len(bearcart_dataset)}")
 
 # Create training dataloader and test dataloader
-train_size = round(len(bearcart_dataset)*0.9)
+train_size = round(len(bearcart_dataset)*0.925)
 test_size = len(bearcart_dataset) - train_size
 print(f"train size: {train_size}, test size: {test_size}")
 train_data, test_data = random_split(bearcart_dataset, [train_size, test_size])
-train_dataloader = DataLoader(train_data, batch_size=125)
-test_dataloader = DataLoader(test_data, batch_size=125)
+train_dataloader = DataLoader(train_data, batch_size=128)
+test_dataloader = DataLoader(test_data, batch_size=128)
 
 # Create model - Pass in image size
 model = convnets.AutopilotNet().to(DEVICE)  # choose the architecture class from cnn_network.py
 # Hyper-parameters (lr=0.001, epochs=10 | lr=0.0001, epochs=15 or 20)
-lr = 0.001
+lr = 0.002
 optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=0.0001)
 # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.8)
 loss_fn = nn.MSELoss()
