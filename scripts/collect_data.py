@@ -61,15 +61,15 @@ cam.configure(
     )
 )
 cam.start()
-for i in reversed(range(60)):
+for i in reversed(range(72)):
     frame = cam.capture_array()
     # cv.imshow("Camera", frame)
     # cv.waitKey(1)
     if frame is None:
         print("No frame received. TERMINATE!")
         sys.exit()
-    if not i % 20:
-        print(i/20)  # count down 3, 2, 1 sec
+    if not i % 24:
+        print(i/24)  # count down 3, 2, 1 sec
 # Init timer for FPS computing
 start_stamp = time()
 frame_counts = 0
