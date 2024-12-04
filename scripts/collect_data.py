@@ -17,6 +17,7 @@ params_file_path = os.path.join(sys.path[0], 'configs.json')
 params_file = open(params_file_path)
 params = json.load(params_file)
 # Constants
+STEERING_DIR = params['steering_dir']
 STEERING_AXIS = params['steering_joy_axis']
 STEERING_CENTER = params['steering_center']
 STEERING_RANGE = params['steering_range']
@@ -56,19 +57,19 @@ cam = Picamera2()
 cam.configure(
     cam.create_preview_configuration(
         main={"format": 'RGB888', "size": (176, 208)},
-        controls={"FrameDurationLimits": (50000, 50000)},  # 20 FPS
+        controls={"FrameDurationLimits": (41667, 41667)},  # 24 FPS
     )
 )
 cam.start()
-for i in reversed(range(60)):
+for i in reversed(range(72)):
     frame = cam.capture_array()
     # cv.imshow("Camera", frame)
     # cv.waitKey(1)
     if frame is None:
         print("No frame received. TERMINATE!")
         sys.exit()
-    if not i % 20:
-        print(i/20)  # count down 3, 2, 1 sec
+    if not i % 24:
+        print(i/24)  # count down 3, 2, 1 sec
 # Init timer for FPS computing
 start_stamp = time()
 frame_counts = 0
@@ -107,7 +108,7 @@ try:
                     ser_pico.close()
                     sys.exit()
         # Calaculate steering and throttle value
-        act_st = ax_val_st  # steer action: -1: left, 1: right
+        act_st = ax_val_st * STEERING_DIR  # steer action: -1: left, 1: right
         act_th = -ax_val_th  # throttle action: -1: max forward, 1: max backward
         # Encode steering value to dutycycle in nanosecond
         duty_st = STEERING_CENTER - STEERING_RANGE + int(STEERING_RANGE * (act_st + 1))
