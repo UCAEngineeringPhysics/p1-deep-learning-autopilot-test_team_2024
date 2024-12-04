@@ -31,7 +31,7 @@ python ~/dlr/scripts/train.py 2024-11-12-13-14
 **Following example needs logging out from the server**.
 ```bash
 rsync -rv --partial --progress user@192.168.0.112:~/dlr/data/2024-11-12-13-14/*.pth ~/dlr/models/pilot.pth
-rsync -rv --partial --progress user@192.168.0.112:~/dlr/data/2024-11-12-13-14/*.png ~/dlr/models/pilot.png  # optional
+rsync -rv --partial --progress user@192.168.0.112:~/dlr/data/2024-11-12-13-14/*.png ~/dlr/models/  # optional
 ```
 7. Deploy autopilot
 ```bash
