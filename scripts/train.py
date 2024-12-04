@@ -84,12 +84,12 @@ bearcart_dataset = BearCartDataset(annotations_file, img_dir)
 print(f"data length: {len(bearcart_dataset)}")
 
 # Create training dataloader and test dataloader
-train_size = round(len(bearcart_dataset)*0.9)
+train_size = round(len(bearcart_dataset)*0.925)
 test_size = len(bearcart_dataset) - train_size
 print(f"train size: {train_size}, test size: {test_size}")
 train_data, test_data = random_split(bearcart_dataset, [train_size, test_size])
-train_dataloader = DataLoader(train_data, batch_size=125)
-test_dataloader = DataLoader(test_data, batch_size=125)
+train_dataloader = DataLoader(train_data, batch_size=128)
+test_dataloader = DataLoader(test_data, batch_size=128)
 
 # Create model - Pass in image size
 model = convnets.AutopilotNet().to(DEVICE)  # choose the architecture class from cnn_network.py
